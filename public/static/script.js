@@ -45,7 +45,7 @@ async function generateConfig2() {
     button.classList.add("button--loading");
 
     try {
-        const response = await fetch(`/warp`);
+        const response = await fetch(`/warp2`);
         const data = await response.json();
 
         if (data.success) {
