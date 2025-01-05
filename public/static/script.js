@@ -224,8 +224,13 @@ document.getElementById('generateButton6').onclick = generateConfig6;
 document.getElementById('generateButton').onclick = generateConfig;
 
 document.getElementById('telegramButton').onclick = function() {
-    window.location.href = 'https://t.me/findllimonix';
+    window.location.href = 'https://t.me/vpn_1_1_1_1_warp';
 }
+
+document.getElementById('BoostyButton').onclick = function() {
+    window.location.href = 'https://boosty.to/warphelp/donate';
+}
+
 document.getElementById('githubButton').onclick = function() {
-    window.location.href = 'https://github.com/llimonix/warp-config-generator-vercel';
+    window.location.href = 'https://docs.google.com/document/d/1DX4X7t7V4QasQJYbps5D1yNtsK7tqsouSMJH2w4AMOY';
 }
