@@ -81,7 +81,7 @@ async function generateConfig3() {
     button.classList.add("button--loading");
 
     try {
-        const response = await fetch(`/warp`);
+        const response = await fetch(`/warp3`);
         const data = await response.json();
 
         if (data.success) {
@@ -117,7 +117,7 @@ async function generateConfig4() {
     button.classList.add("button--loading");
 
     try {
-        const response = await fetch(`/warp`);
+        const response = await fetch(`/warp4`);
         const data = await response.json();
 
         if (data.success) {
@@ -153,7 +153,7 @@ async function generateConfig5() {
     button.classList.add("button--loading");
 
     try {
-        const response = await fetch(`/warp`);
+        const response = await fetch(`/warp5`);
         const data = await response.json();
 
         if (data.success) {
@@ -189,7 +189,7 @@ async function generateConfig6() {
     button.classList.add("button--loading");
 
     try {
-        const response = await fetch(`/warp`);
+        const response = await fetch(`/warp6`);
         const data = await response.json();
 
         if (data.success) {
