@@ -30,7 +30,7 @@ async function apiRequest(method, endpoint, body = null, token = null) {
         options.body = JSON.stringify(body);
     }
 
-    const response = await fetch(`https://api.cloudflareclient.com/v0i1909051800/${endpoint}`, options);
+    const response = await (`https://api.cloudflareclient.com/v0i1909051800/${endpoint}`, options);
     return response.json();
 }
 
