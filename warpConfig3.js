@@ -59,8 +59,43 @@ async function generateWarpConfig() {
     const client_ipv4 = warpResponse.result.config.interface.addresses.v4;
     const client_ipv6 = warpResponse.result.config.interface.addresses.v6;
 
+    const reserved64 = warpResponse.result.config.client_id;
+    const reservedHex = Buffer.from(reserved64, 'base64').toString('hex');
+    const reservedDec = reservedHex.match(/.{1,2}/g).map(hex => parseInt(hex, 16)).join(', ');
+    const reservedHex2 = '0x' + reservedHex;
+
     // Формируем конфиг
-    const conf = `КОНФИГ 3`;
+    const conf = `{
+  "outbounds":   [
+{
+"tag": "WARP",
+"reserved": [${reservedDec}],
+"mtu": 1280,
+"fake_packets": "5-10",
+"fake_packets_size": "40-100",
+"fake_packets_delay": "20-250",
+"fake_packets_mode": "m4",
+"private_key": "${privKey}",
+"type": "wireguard",
+"local_address": ["${client_ipv4}/24", "${client_ipv6}/128"],
+"peer_public_key": "${peer_pub}",
+"server": "188.114.97.170",
+"server_port": 2408
+},
+  {
+   "type": "wireguard",
+   "tag": "WARP in WARP",
+   "detour": "WARP",
+   "local_address": ["${wclient_ipv4}/24", "${wclient_ipv6}/128"],
+   "private_key": "${wpriv}",
+   "peer_public_key": "${peer_pub}",
+   "reserved": ${wreservedDec},
+   "mtu": 1280,
+   "server": "188.114.97.170",
+   "server_port": 1018
+  }
+  ]
+}`;
 
     // Возвращаем конфиг
     return conf;
