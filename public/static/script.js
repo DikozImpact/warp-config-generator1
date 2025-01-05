@@ -35,8 +35,8 @@ async function generateConfig() {
 }
 
 async function generateConfig2() {
-    const button = document.getElementById('generateButton');
-    const button_text = document.querySelector('#generateButton .button__text');
+    const button = document.getElementById('generateButton2');
+    const button_text = document.querySelector('#generateButton2 .button__text');
     const status = document.getElementById('status');
     const randomNumber = Math.floor(Math.random() * (999 - 100 + 1)) + 100;
 
@@ -70,7 +70,7 @@ async function generateConfig2() {
     }
 }
 
-document.getElementById('generateButton2').onclick = generateConfig;
+document.getElementById('generateButton2').onclick = generateConfig2;
 document.getElementById('generateButton').onclick = generateConfig;
 
 document.getElementById('telegramButton').onclick = function() {
