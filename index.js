@@ -1,5 +1,6 @@
 const express = require('express');
-const { getWarpConfigLink } = require('./warpConfig2');
+const { getWarpConfigLink } = require('./warpConfig');
+const { getWarpConfigLink2 } = require('./warpConfig2');
 const path = require('path');
 
 const app = express();
@@ -26,5 +27,20 @@ app.get('/warp', async (req, res) => {
         res.status(500).json({ success: false, message: 'Произошла ошибка на сервере.' });
     }
 });
+
+app.get('/warp2', async (req, res) => {
+    try {
+        const content = await getWarpConfigLink2();
+        if (content) {
+            res.json({ success: true, content });
+        } else {
+            res.status(500).json({ success: false, message: 'Не удалось сгенерировать конфиг.' });
+        }
+    } catch (error) {
+        console.error('Ошибка при обработке запроса:', error);
+        res.status(500).json({ success: false, message: 'Произошла ошибка на сервере.' });
+    }
+});
+
 
 module.exports = app;
