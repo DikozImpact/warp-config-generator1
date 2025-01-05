@@ -1,5 +1,5 @@
 const express = require('express');
-const { getWarpConfigLink } = require('./warpConfig');
+const { getWarpConfigLink } = require('./warpConfig2');
 const path = require('path');
 
 const app = express();
