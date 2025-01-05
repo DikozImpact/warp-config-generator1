@@ -92,7 +92,7 @@ async function generateConfig3() {
                 link.click();
             };
 
-            button_text.textContent = `WARPinWARP_${randomNumber}.conf`;
+            button_text.textContent = `Скачать WARPinWARP_${randomNumber}.conf`;
             button.onclick = downloadFile;
             downloadFile();
         } else {
@@ -200,7 +200,7 @@ async function generateConfig6() {
                 link.click();
             };
 
-            button_text.textContent = `WARPm_${randomNumber}.conf`;
+            button_text.textContent = `Скачать WARPm_${randomNumber}.conf`;
             button.onclick = downloadFile;
             downloadFile();
         } else {
