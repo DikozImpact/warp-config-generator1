@@ -16,11 +16,11 @@ async function generateConfig() {
             const downloadFile = () => {
                 const link = document.createElement('a');
                 link.href = 'data:text/plain;base64,' + data.content;
-                link.download = `Warp_${randomNumber}.conf`;
+                link.download = `WARPp_${randomNumber}.conf`;
                 link.click();
             };
 
-            button_text.textContent = `Скачать Warp_${randomNumber}.conf`;
+            button_text.textContent = `Скачать WARPp_${randomNumber}.conf`;
             button.onclick = downloadFile;
             downloadFile();
         } else {
@@ -52,11 +52,11 @@ async function generateConfig2() {
             const downloadFile = () => {
                 const link = document.createElement('a');
                 link.href = 'data:text/plain;base64,' + data.content;
-                link.download = `KaringWarp_${randomNumber}.conf`;
+                link.download = `KaringWARP_${randomNumber}.conf`;
                 link.click();
             };
 
-            button_text.textContent = `Скачать KaringWarp_${randomNumber}.conf`;
+            button_text.textContent = `Скачать KaringWARP_${randomNumber}.conf`;
             button.onclick = downloadFile;
             downloadFile();
         } else {
@@ -88,11 +88,11 @@ async function generateConfig3() {
             const downloadFile = () => {
                 const link = document.createElement('a');
                 link.href = 'data:text/plain;base64,' + data.content;
-                link.download = `WarpInWarp_${randomNumber}.conf`;
+                link.download = `WARPinWARP_${randomNumber}.conf`;
                 link.click();
             };
 
-            button_text.textContent = `WarpInWarp_${randomNumber}.conf`;
+            button_text.textContent = `WARPinWARP_${randomNumber}.conf`;
             button.onclick = downloadFile;
             downloadFile();
         } else {
@@ -124,11 +124,11 @@ async function generateConfig4() {
             const downloadFile = () => {
                 const link = document.createElement('a');
                 link.href = 'data:text/plain;base64,' + data.content;
-                link.download = `NekoRayWarp_${randomNumber}.conf`;
+                link.download = `NekoRayWARP_${randomNumber}.conf`;
                 link.click();
             };
 
-            button_text.textContent = `Скачать NekoRayWarp_${randomNumber}.conf`;
+            button_text.textContent = `Скачать NekoRayWARP_${randomNumber}.conf`;
             button.onclick = downloadFile;
             downloadFile();
         } else {
@@ -160,11 +160,11 @@ async function generateConfig5() {
             const downloadFile = () => {
                 const link = document.createElement('a');
                 link.href = 'data:text/plain;base64,' + data.content;
-                link.download = `ExclaveWarp_${randomNumber}.conf`;
+                link.download = `ExclaveWARP_${randomNumber}.conf`;
                 link.click();
             };
 
-            button_text.textContent = `Скачать ExclaveWarp_${randomNumber}.conf`;
+            button_text.textContent = `Скачать ExclaveWARP_${randomNumber}.conf`;
             button.onclick = downloadFile;
             downloadFile();
         } else {
@@ -196,11 +196,11 @@ async function generateConfig6() {
             const downloadFile = () => {
                 const link = document.createElement('a');
                 link.href = 'data:text/plain;base64,' + data.content;
-                link.download = `AWG_WARP_m_${randomNumber}.conf`;
+                link.download = `WARPm_${randomNumber}.conf`;
                 link.click();
             };
 
-            button_text.textContent = `AWG_${randomNumber}.conf`;
+            button_text.textContent = `WARPm_${randomNumber}.conf`;
             button.onclick = downloadFile;
             downloadFile();
         } else {
