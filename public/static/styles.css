@@ -50,6 +50,20 @@ button.button--loading {
 #generateButton {
     background: linear-gradient(90deg, #eeac43, #f15874);
 }
+
+#generateButton2 {
+    background: linear-gradient(90deg, #eeac43, #f15874);
+}
+#generateButton3 {
+    background: linear-gradient(90deg, #eeac43, #f15874);
+}
+#generateButton4 {
+    background: linear-gradient(90deg, #eeac43, #f15874);
+}
+#generateButton5 {
+    background: linear-gradient(90deg, #eeac43, #f15874);
+}
+
 #telegramButton {
     background: linear-gradient(90deg, #2a3797, #0d87d2);
 }
