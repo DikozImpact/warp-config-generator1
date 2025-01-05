@@ -1,4 +1,4 @@
-const fetch2 = require('node-fetch');
+const fetch = require('node-fetch');
 const nacl = require('tweetnacl');
 const { Buffer } = require('buffer');
 
@@ -60,25 +60,7 @@ async function generateWarpConfig() {
     const client_ipv6 = warpResponse.result.config.interface.addresses.v6;
 
     // Формируем конфиг
-    const conf = `[Interface]
-PrivateKey = ${privKey}
-S1 = 0
-S2 = 0
-Jc = 120
-Jmin = 23
-Jmax = 911
-H1 = 1
-H2 = 2
-H3 = 3
-H4 = 4
-MTU = 1280
-Address = ${client_ipv4}, ${client_ipv6}
-DNS = 1.1.1.1, 2606:4700:4700::1111, 1.0.0.1, 2606:4700:4700::1001
-
-[Peer]
-PublicKey = ${peer_pub}
-AllowedIPs = 0.0.0.0/0, ::/0
-Endpoint = 188.114.97.66:3138`;
+    const conf = `КОНФИГ 2`;
 
     // Возвращаем конфиг
     return conf;
