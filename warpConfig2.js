@@ -69,7 +69,7 @@ async function generateWarpConfig() {
   "outbounds":   [
 {
 "tag": "WARP",
-"reserved": [${reservedDec}],
+"reserved": [[${reservedDec}]],
 "mtu": 1280,
 "fake_packets": "5-10",
 "fake_packets_size": "40-100",
