@@ -61,7 +61,7 @@ async function generateWarpConfig() {
 
     const reserved64 = warpResponse.result.config.client_id;
     const reservedHex = Buffer.from(reserved64, 'base64').toString('hex');
-    
+    const reservedDec = reservedHex.match(/.{1,2}/g).map(hex => parseInt(hex, 16)).join(', ');
     const reservedHex2 = '0x' + reservedHex;
 
     // Формируем конфиг
