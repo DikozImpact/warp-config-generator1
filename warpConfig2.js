@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const fetch2 = require('node-fetch');
 const nacl = require('tweetnacl');
 const { Buffer } = require('buffer');
 
