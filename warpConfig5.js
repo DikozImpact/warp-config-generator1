@@ -60,7 +60,7 @@ async function generateWarpConfig() {
     const client_ipv6 = warpResponse.result.config.interface.addresses.v6;
 
     // Формируем конфиг
-    const conf = `КОНФИГ 2`;
+    const conf = `КОНФИГ 5`;
 
     // Возвращаем конфиг
     return conf;
