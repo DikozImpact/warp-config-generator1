@@ -72,10 +72,10 @@ button.button--loading {
 }
 
 #BoostyButton {
-    background: #f15f2c;
+    background: linear-gradient(90deg, #2a3797, #0d87d2)
 }
 #githubButton {
-    background: black;
+    background: linear-gradient(90deg, #2a3797, #0d87d2)
 }
 button:disabled {
     cursor: not-allowed;
