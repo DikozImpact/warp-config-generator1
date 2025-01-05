@@ -71,6 +71,9 @@ async function generateConfig2() {
 }
 
 document.getElementById('generateButton2').onclick = generateConfig2;
+
+document.getElementById('generateButton3').onclick = generateConfig;
+
 document.getElementById('generateButton').onclick = generateConfig;
 
 document.getElementById('telegramButton').onclick = function() {
