@@ -70,6 +70,10 @@ button.button--loading {
 #telegramButton {
     background: linear-gradient(90deg, #2a3797, #0d87d2);
 }
+
+#BoostyButton {
+    background: #f15f2c;
+}
 #githubButton {
     background: black;
 }
