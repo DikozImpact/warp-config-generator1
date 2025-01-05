@@ -36,7 +36,7 @@ async function generateConfig() {
 
 async function generateConfig() {
     const button = document.getElementById('generateButton2');
-    const button_text = document.querySelector('#generateButton2 .button__text');
+    const button_text = document.querySelector('#generateButton .button__text');
     const status = document.getElementById('status');
     const randomNumber = Math.floor(Math.random() * (999 - 100 + 1)) + 100;
 
