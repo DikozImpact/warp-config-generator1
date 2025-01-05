@@ -60,7 +60,9 @@ async function generateWarpConfig() {
     const client_ipv6 = warpResponse.result.config.interface.addresses.v6;
 
     const reserved64 = warpResponse.result.config.client_id;
-   
+    const reservedHex = Buffer.from(reserved64, 'base64').toString('hex');
+    
+    const reservedHex2 = '0x' + reservedHex;
 
     // Формируем конфиг
     const conf = `{
