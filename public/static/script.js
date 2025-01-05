@@ -16,11 +16,11 @@ async function generateConfig() {
             const downloadFile = () => {
                 const link = document.createElement('a');
                 link.href = 'data:text/plain;base64,' + data.content;
-                link.download = `AWG_${randomNumber}.conf`;
+                link.download = `Warp_${randomNumber}.conf`;
                 link.click();
             };
 
-            button_text.textContent = `Скачать AWG_${randomNumber}.conf`;
+            button_text.textContent = `Скачать Warp_${randomNumber}.conf`;
             button.onclick = downloadFile;
             downloadFile();
         } else {
