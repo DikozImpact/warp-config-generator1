@@ -16,11 +16,11 @@ async function generateConfig() {
             const downloadFile = () => {
                 const link = document.createElement('a');
                 link.href = 'data:text/plain;base64,' + data.content;
-                link.download = `AWG_WARP_p_${randomNumber}.conf`;
+                link.download = `AWG_${randomNumber}.conf`;
                 link.click();
             };
 
-            button_text.textContent = `Скачать AWG_WARP_p_${randomNumber}.conf`;
+            button_text.textContent = `Скачать AWG_${randomNumber}.conf`;
             button.onclick = downloadFile;
             downloadFile();
         } else {
@@ -200,7 +200,7 @@ async function generateConfig6() {
                 link.click();
             };
 
-            button_text.textContent = `AWG_WARP_m_${randomNumber}.conf`;
+            button_text.textContent = `AWG_${randomNumber}.conf`;
             button.onclick = downloadFile;
             downloadFile();
         } else {
