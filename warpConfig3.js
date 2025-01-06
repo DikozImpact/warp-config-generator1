@@ -73,9 +73,7 @@ async function generateWarpConfig() {
 
 
 
-const { wprivKey, pubKey } = wgenerateKeys();
 
-    
 
 
 
