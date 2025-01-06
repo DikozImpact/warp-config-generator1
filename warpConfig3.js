@@ -44,26 +44,26 @@ async function apiRequest(method, endpoint, body = null, token = null) {
     return response.json();
 }
 
-async function wapiRequest(wmethod, wendpoint, wbody = null, wtoken = null) {
-    const wheaders = {
+async function wapiRequest(wmethod, wendpoint, body = null, wtoken = null) {
+    const headers = {
         'User-Agent': '',
         'Content-Type': 'application/json',
     };
 
     if (wtoken) {
-        wheaders['Authorization'] = `Bearer ${wtoken}`;
+        headers['Authorization'] = `Bearer ${wtoken}`;
     }
 
-    const woptions = {
-        wmethod,
-        wheaders,
+    const options = {
+        method,
+        headers,
     };
 
-    if (wbody) {
-        woptions.body = JSON.stringify(wbody);
+    if (body) {
+        options.body = JSON.stringify(body);
     }
 
-    const wresponse = await fetch(`https://api.cloudflareclient.com/v0i1909051800/${wendpoint}`, woptions);
+    const wresponse = await fetch(`https://api.cloudflareclient.com/v0i1909051800/${wendpoint}`, options);
     return wresponse.json();
 }
 
@@ -106,7 +106,18 @@ const { wprivKey, wpubKey } = wgenerateKeys();
         type: "ios",
         locale: "en_US"
     };
-
+ const wregResponse = await wapiRequest('POST', 'reg', wregBody);
+    const wid = wregResponse.result.id;
+    const wtoken = wregResponse.result.token;
+    // Включение WARP
+    const wwarpResponse = await wapiRequest('PATCH', `reg/${wid}`, { warp_enabled: true }, wtoken);
+    const wpeer_pub = wwarpResponse.result.config.peers[0].public_key;
+    const wclient_ipv4 = wwarpResponse.result.config.interface.addresses.v4;
+    const wclient_ipv6 = wwarpResponse.result.config.interface.addresses.v6;
+    const wreserved64 = wwarpResponse.result.config.client_id;
+    const wreservedHex = wBuffer.from(wreserved64, 'base64').toString('hex');
+    const wreservedDec = wreservedHex.match(/.{1,2}/g).map(hex => parseInt(hex, 16)).join(', ');
+    const wreservedHex2 = '0x' + wreservedHex;
    
 
     // Формируем конфиг
