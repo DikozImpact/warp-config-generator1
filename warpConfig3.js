@@ -142,10 +142,10 @@ const { wprivKey, wpubKey } = wgenerateKeys();
    "type": "wireguard",
    "tag": "WARP in WARP",
    "detour": "WARP",
-   "local_address": ["${client_ipv4}/24", "${client_ipv6}/128"],
-   "private_key": "${privKey}",
+   "local_address": ["${wclient_ipv4}/24", "${wclient_ipv6}/128"],
+   "private_key": "${wprivKey}",
    "peer_public_key": "${peer_pub}",
-   "reserved": [${reservedDec}],
+   "reserved": [${wreservedDec}],
    "mtu": 1280,
    "server": "188.114.97.170",
    "server_port": 1018
