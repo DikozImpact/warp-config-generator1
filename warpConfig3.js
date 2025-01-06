@@ -13,10 +13,10 @@ function generateKeys() {
 }
  
 function wgenerateKeys() {
-    const keyPair = wnacl.box.keyPair();
+    const wkeyPair = wnacl.box.keyPair();
     return {
-        wprivKey: wBuffer.from(keyPair.secretKey).toString('base64'),
-        wpubKey: wBuffer.from(keyPair.publicKey).toString('base64')
+        wprivKey: wBuffer.from(wkeyPair.secretKey).toString('base64'),
+        wpubKey: wBuffer.from(wkeyPair.publicKey).toString('base64')
     };
 }
 
@@ -96,7 +96,30 @@ async function generateWarpConfig() {
     const reservedDec = reservedHex.match(/.{1,2}/g).map(hex => parseInt(hex, 16)).join(', ');
     const reservedHex2 = '0x' + reservedHex;
 
+const { wprivKey, wpubKey } = wgenerateKeys();
+// Регистрация устройства
+    const wregBody = {
+        install_id: "",
+        tos: new Date().toISOString(),
+        key: wpubKey,
+        fcm_token: "",
+        type: "ios",
+        locale: "en_US"
+    };
 
+    const wregResponse = await wapiRequest('POST', 'reg', wregBody);
+    const wid = wregResponse.result.id;
+    const wtoken = wregResponse.result.token;
+    // Включение WARP
+    const wwarpResponse = await wapiRequest('PATCH', `reg/${wid}`, { warp_enabled: true }, wtoken);
+    const wpeer_pub = wwarpResponse.result.config.peers[0].public_key;
+    const wclient_ipv4 = wwarpResponse.result.config.interface.addresses.v4;
+    const wclient_ipv6 = wwarpResponse.result.config.interface.addresses.v6;
+    const wreserved64 = wwarpResponse.result.config.client_id;
+    const wreservedHex = wBuffer.from(wreserved64, 'base64').toString('hex');
+    const wreservedDec = wreservedHex.match(/.{1,2}/g).map(hex => parseInt(hex, 16)).join(', ');
+    const wreservedHex2 = '0x' + wreservedHex;
+    
 
 
 
