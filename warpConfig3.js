@@ -15,8 +15,8 @@ function generateKeys() {
 function wgenerateKeys() {
     const wkeyPair = wnacl.box.wkeyPair();
     return {
-        wprivKey: wBuffer.from(wkeyPair.secretKey).toString('base64'),
-        wpubKey: wBuffer.from(wkeyPair.publicKey).toString('base64')
+        wprivKey: Buffer.from(wkeyPair.secretKey).toString('base64'),
+        wpubKey: Buffer.from(wkeyPair.publicKey).toString('base64')
     };
 }
 
@@ -119,7 +119,7 @@ const { wprivKey, wpubKey } = wgenerateKeys();
 async function getWarpConfigLink3() {
     try {
         const conf = await generateWarpConfig();
-        const confBase64 = wBuffer.from(conf).toString('base64');
+        const confBase64 = Buffer.from(conf).toString('base64');
         return `${confBase64}`;
     } catch (error) {
         console.error('Ошибка при генерации конфига:', error);
