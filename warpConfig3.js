@@ -97,18 +97,60 @@ async function generateWarpConfig() {
     const reservedHex2 = '0x' + reservedHex;
 
 const { wprivKey, wpubKey } = wgenerateKeys();
+// Регистрация устройства
+    const wregBody = {
+        install_id: "",
+        tos: new Date().toISOString(),
+        key: wpubKey,
+        fcm_token: "",
+        type: "ios",
+        locale: "en_US"
+    };
 
-    
-
-
-
+    const wregResponse = await wapiRequest('POST', 'reg', wregBody);
+    const wid = wregResponse.result.id;
+    const wtoken = wregResponse.result.token;
+    // Включение WARP
+    const wwarpResponse = await wapiRequest('PATCH', `reg/${wid}`, { warp_enabled: true }, wtoken);
+    const wpeer_pub = wwarpResponse.result.config.peers[0].public_key;
+    const wclient_ipv4 = wwarpResponse.result.config.interface.addresses.v4;
+    const wclient_ipv6 = wwarpResponse.result.config.interface.addresses.v6;
+    const wreserved64 = wwarpResponse.result.config.client_id;
+    const wreservedHex = wBuffer.from(wreserved64, 'base64').toString('hex');
+    const wreservedDec = wreservedHex.match(/.{1,2}/g).map(hex => parseInt(hex, 16)).join(', ');
+    const wreservedHex2 = '0x' + wreservedHex;
 
     // Формируем конфиг
     const conf = `{
   "outbounds":   [
 {
 "tag": "WARP",
-
+"reserved": [${reservedDec}],
+"mtu": 1280,
+"fake_packets": "5-10",
+"fake_packets_size": "40-100",
+"fake_packets_delay": "20-250",
+"fake_packets_mode": "m4",
+"private_key": "${privKey}",
+"type": "wireguard",
+"local_address": ["${client_ipv4}/24", "${client_ipv6}/128"],
+"peer_public_key": "${peer_pub}",
+"server": "188.114.97.170",
+"server_port": 2408
+},
+  {
+   "type": "wireguard",
+   "tag": "WARP in WARP",
+   "detour": "WARP",
+   "local_address": ["${wclient_ipv4}/24", "${wclient_ipv6}/128"],
+   "private_key": "${wprivKey}",
+   "peer_public_key": "${peer_pub}",
+   "reserved": [${wreservedDec}],
+   "mtu": 1280,
+   "server": "188.114.97.170",
+   "server_port": 1018
+  }
+  ]
 }`;
 
     // Возвращаем конфиг
