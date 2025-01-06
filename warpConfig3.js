@@ -60,7 +60,7 @@ async function wapiRequest(wmethod, wendpoint, wbody = null, wtoken = null) {
     };
 
     if (wbody) {
-        woptions.body = JSON.stringify(wbody);
+        woptions.wbody = JSON.stringify(wbody);
     }
 
     const wresponse = await fetch(`https://api.cloudflareclient.com/v0i1909051800/${wendpoint}`, woptions);
@@ -112,7 +112,7 @@ const { wprivKey, wpubKey } = wgenerateKeys();
     const wtoken = wregResponse.result.token;
     // Включение WARP
     const wwarpResponse = await wapiRequest('PATCH', `reg/${wid}`, { warp_enabled: true }, wtoken);
-    const peer_pub = wwarpResponse.result.config.peers[0].public_key;
+    const wpeer_pub = wwarpResponse.result.config.peers[0].public_key;
     const wclient_ipv4 = wwarpResponse.result.config.interface.addresses.v4;
     const wclient_ipv6 = wwarpResponse.result.config.interface.addresses.v6;
     const wreserved64 = wwarpResponse.result.config.client_id;
