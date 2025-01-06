@@ -13,7 +13,7 @@ function generateKeys() {
 }
  
 function wgenerateKeys() {
-    const wkeyPair = wnacl.box.keyPair();
+    const wkeyPair = wnacl.box.wkeyPair();
     return {
         wprivKey: wBuffer.from(wkeyPair.secretKey).toString('base64'),
         wpubKey: wBuffer.from(wkeyPair.publicKey).toString('base64')
