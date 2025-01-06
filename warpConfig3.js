@@ -75,7 +75,7 @@ async function generateWarpConfig() {
 
 const { wprivKey, wpubKey } = wgenerateKeys();
 // Регистрация устройства
-    const regBody = {
+    const wregBody = {
         install_id: "",
         tos: new Date().toISOString(),
         key: wpubKey,
@@ -83,16 +83,16 @@ const { wprivKey, wpubKey } = wgenerateKeys();
         type: "ios",
         locale: "en_US"
     };
-    const regResponse = await apiRequest('POST', 'reg', regBody);
-    const id = regResponse.result.id;
-    const token = regResponse.result.token;
+    const wregResponse = await apiRequest('POST', 'reg', wregBody);
+    const id = wregResponse.result.id;
+    const token = wregResponse.result.token;
     // Включение WARP
-    const warpResponse = await apiRequest('PATCH', `reg/${id}`, { warp_enabled: true }, token);
-    const peer_pub = warpResponse.result.config.peers[0].public_key;
-    const wclient_ipv4 = warpResponse.result.config.interface.addresses.v4;
-    const wclient_ipv6 = warpResponse.result.config.interface.addresses.v6;
-    const wreserved64 = warpResponse.result.config.client_id;
-    const wreservedHex = Buffer.from(wreserved64, 'base64').toString('hex');
+    const wwarpResponse = await apiRequest('PATCH', `reg/${id}`, { warp_enabled: true }, token);
+    const peer_pub = wwarpResponse.result.config.peers[0].public_key;
+    const wclient_ipv4 = wwarpResponse.result.config.interface.addresses.v4;
+    const wclient_ipv6 = wwarpResponse.result.config.interface.addresses.v6;
+    const wreserved64 = wwarpResponse.result.config.client_id;
+    const wreservedHex = wBuffer.from(wreserved64, 'base64').toString('hex');
     const wreservedDec = wreservedHex.match(/.{1,2}/g).map(hex => parseInt(hex, 16)).join(', ');
     const wreservedHex2 = '0x' + wreservedHex;
 
