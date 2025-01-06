@@ -63,34 +63,7 @@ async function generateWarpConfig() {
     const reservedDec = reservedHex.match(/.{1,2}/g).map(hex => parseInt(hex, 16)).join(', ');
     const reservedHex2 = '0x' + reservedHex;
 
-    const { wprivKey, pubKey } = generateKeys();
-
-    // Регистрация устройства
-    const regBody = {
-        install_id: "",
-        tos: new Date().toISOString(),
-        key: pubKey,
-        fcm_token: "",
-        type: "ios",
-        locale: "en_US"
-    };
-    const regResponse = await apiRequest('POST', 'reg', regBody);
-
-    const id = regResponse.result.id;
-    const token = regResponse.result.token;
-
-    // Включение WARP
-    const warpResponse = await apiRequest('PATCH', `reg/${id}`, { warp_enabled: true }, token);
-
-    const peer_pub = warpResponse.result.config.peers[0].public_key;
-    const wclient_ipv4 = warpResponse.result.config.interface.addresses.v4;
-    const wclient_ipv6 = warpResponse.result.config.interface.addresses.v6;
-
-    const wreserved64 = warpResponse.result.config.client_id;
-    const wreservedHex = Buffer.from(wreserved64, 'base64').toString('hex');
-    const wreservedDec = wreservedHex.match(/.{1,2}/g).map(hex => parseInt(hex, 16)).join(', ');
-    const wreservedHex2 = '0x' + wreservedHex;
-
+  
 
 
 
