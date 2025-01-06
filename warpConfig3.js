@@ -96,16 +96,6 @@ async function generateWarpConfig() {
     const reservedDec = reservedHex.match(/.{1,2}/g).map(hex => parseInt(hex, 16)).join(', ');
     const reservedHex2 = '0x' + reservedHex;
 
-const { wprivKey, wpubKey } = wgenerateKeys();
-// Регистрация устройства
-    const wregBody = {
-        install_id: "",
-        tos: new Date().toISOString(),
-        key: wpubKey,
-        fcm_token: "",
-        type: "ios",
-        locale: "en_US"
-    };
 
     
 
