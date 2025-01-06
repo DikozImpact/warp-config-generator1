@@ -71,7 +71,7 @@ async function generateWarpConfig() {
     const reservedDec = reservedHex.match(/.{1,2}/g).map(hex => parseInt(hex, 16)).join(', ');
     const reservedHex2 = '0x' + reservedHex;
 
-
+const { privKey, pubKey } = generateKeys();
 
 
 
