@@ -108,32 +108,7 @@ const { wprivKey, wpubKey } = wgenerateKeys();
   "outbounds":   [
 {
 "tag": "WARP",
-"reserved": [${reservedDec}],
-"mtu": 1280,
-"fake_packets": "5-10",
-"fake_packets_size": "40-100",
-"fake_packets_delay": "20-250",
-"fake_packets_mode": "m4",
-"private_key": "",
-"type": "wireguard",
-"local_address": ["${client_ipv4}/24", "${client_ipv6}/128"],
-"peer_public_key": "${peer_pub}",
-"server": "188.114.97.170",
-"server_port": 2408
-},
-  {
-   "type": "wireguard",
-   "tag": "WARP in WARP",
-   "detour": "WARP",
-   "local_address": ["${client_ipv4}/24", "${client_ipv6}/128"],
-   "private_key": "",
-   "peer_public_key": "${peer_pub}",
-   "reserved": [${reservedDec}],
-   "mtu": 1280,
-   "server": "188.114.97.170",
-   "server_port": 1018
-  }
-  ]
+
 }`;
 
     // Возвращаем конфиг
