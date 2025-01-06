@@ -119,7 +119,7 @@ const { wprivKey, wpubKey } = wgenerateKeys();
 async function getWarpConfigLink3() {
     try {
         const conf = await generateWarpConfig();
-        const confBase64 = Buffer.from(conf).toString('base64');
+        const confBase64 = wBuffer.from(conf).toString('base64');
         return `${confBase64}`;
     } catch (error) {
         console.error('Ошибка при генерации конфига:', error);
