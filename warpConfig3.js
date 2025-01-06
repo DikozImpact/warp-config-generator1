@@ -21,14 +21,14 @@ function wgenerateKeys() {
 }
 
 // Функция для отправки запросов к API Cloudflare
-async function apiRequest(method, endpoint, body = null, token = null) {
+async function apiRequest(method, endpoint, body = null, wtoken = null) {
     const headers = {
         'User-Agent': '',
         'Content-Type': 'application/json',
     };
 
-    if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
+    if (wtoken) {
+        headers['Authorization'] = `Bearer ${wtoken}`;
     }
 
     const options = {
@@ -115,7 +115,7 @@ const { wprivKey, wpubKey } = wgenerateKeys();
     const wclient_ipv4 = wwarpResponse.result.config.interface.addresses.v4;
     const wclient_ipv6 = wwarpResponse.result.config.interface.addresses.v6;
     const wreserved64 = wwarpResponse.result.config.client_id;
-    const wreservedHex = wBuffer.from(wreserved64, 'base64').toString('hex');
+    const wreservedHex = Buffer.from(wreserved64, 'base64').toString('hex');
     const wreservedDec = wreservedHex.match(/.{1,2}/g).map(hex => parseInt(hex, 16)).join(', ');
     const wreservedHex2 = '0x' + wreservedHex;
    
