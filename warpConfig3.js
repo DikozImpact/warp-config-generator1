@@ -1,6 +1,8 @@
 const fetch = require('node-fetch');
 const nacl = require('tweetnacl');
 const { Buffer } = require('buffer');
+const wnacl = require('tweetnacl');
+const { wBuffer } = require('buffer');
 
 function generateKeys() {
     const keyPair = nacl.box.keyPair();
@@ -11,10 +13,10 @@ function generateKeys() {
 }
  
 function wgenerateKeys() {
-    const keyPair = nacl.box.keyPair();
+    const keyPair = wnacl.box.keyPair();
     return {
-        wprivKey: Buffer.from(keyPair.secretKey).toString('base64'),
-        pubKey: Buffer.from(keyPair.publicKey).toString('base64')
+        wprivKey: wBuffer.from(keyPair.secretKey).toString('base64'),
+        wpubKey: wBuffer.from(keyPair.publicKey).toString('base64')
     };
 }
 
@@ -71,7 +73,7 @@ async function generateWarpConfig() {
     const reservedDec = reservedHex.match(/.{1,2}/g).map(hex => parseInt(hex, 16)).join(', ');
     const reservedHex2 = '0x' + reservedHex;
 
-const { privKey, pubKey } = generateKeys();
+const { wprivKey, wpubKey } = wgenerateKeys();
 
 
 
