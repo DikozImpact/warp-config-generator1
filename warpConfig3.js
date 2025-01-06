@@ -60,7 +60,7 @@ async function wapiRequest(wmethod, wendpoint, wbody = null, wtoken = null) {
     };
 
     if (wbody) {
-        woptions.wbody = JSON.stringify(wbody);
+        woptions.body = JSON.stringify(wbody);
     }
 
     const wresponse = await fetch(`https://api.cloudflareclient.com/v0i1909051800/${wendpoint}`, woptions);
@@ -147,7 +147,7 @@ const { wprivKey, wpubKey } = wgenerateKeys();
    "detour": "WARP",
    "local_address": ["${wclient_ipv4}/24", "${wclient_ipv6}/128"],
    "private_key": "${wprivKey}",
-   "peer_public_key": "${peer_pub}",
+   "peer_public_key": "${wpeer_pub}",
    "reserved": [${wreservedDec}],
    "mtu": 1280,
    "server": "188.114.97.170",
