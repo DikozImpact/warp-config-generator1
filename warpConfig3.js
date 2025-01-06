@@ -44,6 +44,29 @@ async function apiRequest(method, endpoint, body = null, token = null) {
     return response.json();
 }
 
+async function wapiRequest(wmethod, wendpoint, wbody = null, wtoken = null) {
+    const wheaders = {
+        'User-Agent': '',
+        'Content-Type': 'application/json',
+    };
+
+    if (wtoken) {
+        wheaders['Authorization'] = `Bearer ${wtoken}`;
+    }
+
+    const woptions = {
+        wmethod,
+        wheaders,
+    };
+
+    if (wbody) {
+        woptions.body = JSON.stringify(wbody);
+    }
+
+    const wresponse = await fetch(`https://api.cloudflareclient.com/v0i1909051800/${wendpoint}`, woptions);
+    return wresponse.json();
+}
+
 async function generateWarpConfig() {
     const { privKey, pubKey } = generateKeys();
 
@@ -84,11 +107,11 @@ const { wprivKey, wpubKey } = wgenerateKeys();
         locale: "en_US"
     };
 
-    const wregResponse = await apiRequest('POST', 'reg', wregBody);
+    const wregResponse = await wapiRequest('POST', 'reg', wregBody);
     const wid = wregResponse.result.id;
     const wtoken = wregResponse.result.token;
     // Включение WARP
-    const wwarpResponse = await apiRequest('PATCH', `reg/${wid}`, { warp_enabled: true }, wtoken);
+    const wwarpResponse = await wapiRequest('PATCH', `reg/${wid}`, { warp_enabled: true }, wtoken);
     const peer_pub = wwarpResponse.result.config.peers[0].public_key;
     const wclient_ipv4 = wwarpResponse.result.config.interface.addresses.v4;
     const wclient_ipv6 = wwarpResponse.result.config.interface.addresses.v6;
