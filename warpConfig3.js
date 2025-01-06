@@ -146,7 +146,7 @@ const { wprivKey, wpubKey } = wgenerateKeys();
    "tag": "WARP in WARP",
    "detour": "WARP",
    "local_address": ["${client_ipv4}/24", "${client_ipv6}/128"],
-   "private_key": "${wprivKey}",
+   "private_key": "${privKey}",
    "peer_public_key": "${peer_pub}",
    "reserved": [${reservedDec}],
    "mtu": 1280,
