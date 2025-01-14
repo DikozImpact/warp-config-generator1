@@ -224,7 +224,7 @@ document.getElementById('generateButton6').onclick = generateConfig6;
 document.getElementById('generateButton').onclick = generateConfig;
 
 document.getElementById('telegramButton').onclick = function() {
-    window.location.href = 'https://t.me/vpn_1_1_1_1_warp';
+    window.location.href = 'https://t.me/warp_1_1_1_1';
 }
 
 document.getElementById('BoostyButton').onclick = function() {
