@@ -136,7 +136,7 @@ const { wprivKey, wpubKey } = wgenerateKeys();
 "local_address": ["${client_ipv4}/24", "${client_ipv6}/128"],
 "peer_public_key": "${peer_pub}",
 "server": "188.114.97.170",
-"server_port": 2408
+"server_port": 500
 },
   {
    "type": "wireguard",
