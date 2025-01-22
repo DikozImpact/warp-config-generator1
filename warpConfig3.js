@@ -133,7 +133,7 @@ const { wprivKey, wpubKey } = wgenerateKeys();
 "fake_packets_mode": "m4",
 "private_key": "${privKey}",
 "type": "wireguard",
-"local_address": ["${client_ipv4}/24", "${client_ipv6}/128"],
+"local_address": ["${client_ipv4}/32", "${client_ipv6}/128"],
 "peer_public_key": "${peer_pub}",
 "server": "188.114.97.170",
 "server_port": 500
