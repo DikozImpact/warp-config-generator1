@@ -3,6 +3,8 @@ const nacl = require('tweetnacl');
 const { Buffer } = require('buffer');
 const wnacl = require('tweetnacl');
 const { wBuffer } = require('buffer');
+const randomNumber = Math.floor(Math.random() * (999 - 100 + 1)) + 100;
+const randomNumber2 = Math.floor(Math.random() * (999 - 100 + 1)) + 100;
 
 function generateKeys() {
     const keyPair = nacl.box.keyPair();
@@ -124,7 +126,7 @@ const { wprivKey, wpubKey } = wgenerateKeys();
     const conf = `{
   "outbounds":   [
 {
-"tag": "WARP",
+"tag": "WARP_${randomNumber}",
 "reserved": [${reservedDec}],
 "mtu": 1280,
 "fake_packets": "5-10",
@@ -140,13 +142,13 @@ const { wprivKey, wpubKey } = wgenerateKeys();
 },
   {
    "type": "wireguard",
-   "tag": "WARP in WARP",
-   "detour": "WARP",
+   "tag": "WARPinWARP_${randomNumber2}",
+   "detour": "WARP_${randomNumber}",
    "local_address": ["${wclient_ipv4}/32", "${wclient_ipv6}/128"],
    "private_key": "${wprivKey}",
    "peer_public_key": "${peer_pub}",
    "reserved": [${wreservedDec}],
-   "mtu": 1280,
+   "mtu": 1200,
    "server": "188.114.97.170",
    "server_port": 1018
   }
