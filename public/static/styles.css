@@ -96,6 +96,18 @@ button:disabled {
 }
 
 #status {
-    margin-bottom: 20px;
+margin-bottom: 20px;
     color: red;
+	border-radius: 5px;
+	box-shadow: 0 0 0 1px red inset;
+	padding: 15px;
+	margin: 0 auto 20px;
+	display: none;
+}
+
+/* Показываем элемент только на экранах с шириной меньше 768px (мобильные устройства) */
+@media (max-width: 600px) {
+    #status {
+        display: block; /* или inline, inline-block, flex и т.д., в зависимости от нужного отображения */
+    }
 }
