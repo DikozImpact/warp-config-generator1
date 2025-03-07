@@ -232,11 +232,11 @@ async function generateConfig7() {
             const downloadFile = () => {
                 const link = document.createElement('a');
                 link.href = 'data:text/plain;base64,' + data.content;
-                link.download = `ClashWARP_${randomNumber}.conf`;
+                link.download = `ClashWARP_${randomNumber}.yaml`;
                 link.click();
             };
 
-            button_text.textContent = `Скачать ClashWARP_${randomNumber}.conf`;
+            button_text.textContent = `Скачать ClashWARP_${randomNumber}.yaml`;
             button.onclick = downloadFile;
             downloadFile();
         } else {
