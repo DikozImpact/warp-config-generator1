@@ -214,12 +214,48 @@ async function generateConfig6() {
     }
 }
 
+async function generateConfig7() {
+    const button = document.getElementById('generateButton7');
+    const button_text = document.querySelector('#generateButton7 .button__text');
+    const status = document.getElementById('status');
+    const randomNumber = Math.floor(Math.random() * (99 - 10 + 1)) + 10;
+
+    // Изменяем состояние кнопки на загрузку
+    button.disabled = true;
+    button.classList.add("button--loading");
+
+    try {
+        const response = await fetch(`/warp7`);
+        const data = await response.json();
+
+        if (data.success) {
+            const downloadFile = () => {
+                const link = document.createElement('a');
+                link.href = 'data:text/plain;base64,' + data.content;
+                link.download = `ClashWARP_${randomNumber}.conf`;
+                link.click();
+            };
+
+            button_text.textContent = `Скачать ClashWARP_${randomNumber}.conf`;
+            button.onclick = downloadFile;
+            downloadFile();
+        } else {
+            status.textContent = 'Ошибка: ' + data.message;
+        }
+    } catch (error) {
+        status.textContent = 'Произошла ошибка при генерации.';
+    } finally {
+        button.disabled = false;
+        button.classList.remove("button--loading");
+    }
+}
+
 document.getElementById('generateButton2').onclick = generateConfig2;
 document.getElementById('generateButton3').onclick = generateConfig3;
 document.getElementById('generateButton4').onclick = generateConfig4;
 document.getElementById('generateButton5').onclick = generateConfig5;
 document.getElementById('generateButton6').onclick = generateConfig6;
-
+document.getElementById('generateButton7').onclick = generateConfig7;
 
 document.getElementById('generateButton').onclick = generateConfig;
 
