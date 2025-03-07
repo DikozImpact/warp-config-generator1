@@ -5,6 +5,7 @@ const { getWarpConfigLink3 } = require('./WarpInWarp');
 const { getWarpConfigLink4 } = require('./AWGr');
 const { getWarpConfigLink5 } = require('./Neko');
 const { getWarpConfigLink6 } = require('./AWGm');
+const { getWarpConfigLink7 } = require('./Clash');
 const path = require('path');
 
 const app = express();
@@ -91,6 +92,20 @@ app.get('/warp5', async (req, res) => {
 app.get('/warp6', async (req, res) => {
     try {
         const content = await getWarpConfigLink6();
+        if (content) {
+            res.json({ success: true, content });
+        } else {
+            res.status(500).json({ success: false, message: 'Не удалось сгенерировать конфиг.' });
+        }
+    } catch (error) {
+        console.error('Ошибка при обработке запроса:', error);
+        res.status(500).json({ success: false, message: 'Произошла ошибка на сервере.' });
+    }
+});
+
+app.get('/warp7', async (req, res) => {
+    try {
+        const content = await getWarpConfigLink7();
         if (content) {
             res.json({ success: true, content });
         } else {
