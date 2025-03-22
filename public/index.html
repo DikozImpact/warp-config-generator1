@@ -17,24 +17,50 @@
     <img src="/static/logo.svg" alt="Логотип">
    <div id="status">Не открывайте сайт через встроенный браузер телеграмма, иначе у вас не получится ничего скачать.<br>Чтобы открыть сайт в обычном браузере нажмите <strong>справа сверху три точки -> Открыть в браузере</strong>.
 </div>
-<form id="configForm" style="width: 100%; max-width: 400px;">
-    <button id="generateButton"><span class="button__text">AmneziaWG (Проводной интернет)</span></button>
-    <button id="generateButton6"><span class="button__text">AmneziaWG (Мобильный интернет)</span></button>
-    <button id="generateButton4"><span class="button__text">AmneziaWG (Случайный Endpoint)</span></button>
-    <button id="generateButton2"><span class="button__text">Hiddify/Karing</span></button>
-    <button id="generateButton3"><span class="button__text">Hiddify/Karing (WARP in WARP)</span></button>
-    <button id="generateButton5"><span class="button__text">NekoRay/Exclave</span></button>
-    <button id="generateButton7"><span class="button__text">Clash</span></button>
-  </form>  
-    <button id="githubButton" style="width: 100%; max-width: 400px;><span class="button__text">Гайд</span></button>
-    <button id="telegramButton" style="width: 100%; max-width: 400px;><span class="button__text">Telegram канал</span></button>
-
-    <button id="BoostyButton" style="width: 100%; max-width: 400px;"><span class="button__text">Подержать автора</span></button>
-    <div id="newButtons" style="display: none;">
-      <button id="DonationAlertsButton"><span class="button__text">DonationAlerts</span></button>
-      <button id="BoostyNewButton"><span class="button__text">Boosty</span></button>
+<div class="grid-container">
+        <div class="containerAWG">
+            <div class="header">
+                <img src="/static/AWG.webp" alt="AmneziaWG Icon" class="amnezia-icon">
+                <span class="amnezia-text">AmneziaWG</span>
+            </div>
+            <button id="generateButton"><span class="button__text">Проводной интернет</span></button>
+            <button id="generateButton6"><span class="button__text">Мобильный интернет</span></button>
+            <button id="generateButton4"><span class="button__text">Случайный Endpoint</span></button>
+        </div>
+        <div class="containerAWG" style="height: 160px">
+            <div class="header">
+                <img src="/static/Karing.webp" alt="AmneziaWG Icon" class="amnezia-icon">
+                <span class="karing-text">Karing</span>
+                <img src="/static/Hiddify.webp" alt="Hiddify Icon" class="hiddify-icon">
+                <span class="amnezia-text">Hiddify</span>
+            </div>
+            <button id="generateButton2"><span class="button__text">WARP</span></button>
+            <button id="generateButton3"><span class="button__text">WARP in WARP</span></button>
+        </div>
+		    <div class="containerClash" style="height: 100px;">
+            <div class="header">
+                <img src="/static/Clash.webp" alt="AmneziaWG Icon" class="amnezia-icon">
+                <span class="amnezia-text">Clash</span>
+            </div>
+            <button id="generateButton7"><span class="button__text">WARP in WARP</span></button>
+        </div>
+        <div class="containerAWG" style="margin-top: -60px">
+            <div class="header">
+                <img src="/static/Nekobox.webp" alt="AmneziaWG Icon" class="amnezia-icon">
+                <span class="amnezia-text">NekoBox</span>
+            </div>
+            <button id="generateButton5"><span class="button__text">NekoRay/Exclave</span></button>
+            <button id="generateButton8"><span class="button__text">Husi</span></button>
+        </div>
+    
     </div>
-	
+
+    <button id="githubButton" style="width: 100%; max-width: 400px;"><span class="button__text">Гайд</span></button>
+    <button id="telegramButton" style="width: 100%; max-width: 400px;"><span class="button__text">Telegram канал</span></button>
+    <button id="BoostyButton" style="width: 100%; max-width: 400px;"><span class="button__text">Подержать автора</span></button>
+<div id="newButtons">
+    <button id="DonationAlertsButton"><span class="button__text">DonationAlerts</span></button>
+    <button id="BoostyNewButton"><span class="button__text">Boosty</span></button>
+</div>
     <div id="info">Сделано на основе warp.llimonix.pw</div>
 </div>
-</body>
