@@ -65,14 +65,27 @@ async function generateWarpConfig() {
     const reservedHex2 = '0x' + reservedHex;
     // Формируем конфиг
     const conf = `{
-"mtu": 1280,
-"reserved": [${reservedDec}],
-"private_key": "${privKey}",
 "type": "wireguard",
-"local_address": ["${client_ipv4}/32", "${client_ipv6}/128"],
-"peer_public_key": "${peer_pub}",
-"server": "188.114.97.0",
-"server_port": 500
+"tag": "proxy",
+"mtu": 1280,
+"address": ["${client_ipv4}/32", "${client_ipv6}/128"],
+"private_key": "${privKey}",
+"listen_port": 0,
+"peers": [
+{
+"address": "188.114.97.0",
+"port": 500,
+"public_key": "${peer_pub}",
+"pre_shared_key": "",
+"allowed_ips": [
+"0.0.0.0/0",
+"::/0"
+],
+"persistent_keepalive_interval": 600,
+"reserved": "${reservedDec}"
+}
+],
+"detour": "direct"
 }`;
 
     // Возвращаем конфиг
