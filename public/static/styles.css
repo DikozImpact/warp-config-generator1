@@ -2,21 +2,85 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+ 
     background-color: #f4f4f4;
     font-family: 'Roboto', sans-serif;
+    width: 100%; /* Занимает всю ширину */
+    margin: 0; /* Убираем отступы */
 }
 .container {
-    max-width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Центрируем элементы по горизонтали */
+    text-align: center; /* Центрируем текст внутри элементов */
+    width: 100%;
+    max-width: 700px; /* Ограничиваем ширину контейнера */
+    margin: 0 auto; /* Центрируем контейнер на странице */
+    padding: 20px; /* Добавляем отступы */
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Два столбца */
+    gap: 20px; /* Расстояние между контейнерами */
+    width: 100%;
+    max-width: 700px; /* Увеличиваем максимальную ширину, чтобы вместить два контейнера */
+    margin: 0 auto 20px; /* Центрируем и добавляем отступ снизу */
+}
+
+.containerAWG, .containerClash {
     display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    width: 95%; /* Занимает всю ширину */
+    max-width: 300px; /* Уменьшаем ширину контейнера */
+    margin: 0 auto; /* Центрируем и добавляем отступ снизу */
 }
+
+.header {
+    display: flex;
+    justify-content: center; /* Выравниваем по центру */
+    align-items: center;
+    margin-bottom: 10px; /* Отступ снизу */
+    width: 100%; /* Занимает всю ширину */
+    max-width: 400px; /* Ограничиваем ширину, как у контейнера */\
+}
+
+.amnezia-icon {
+    width: 50px; /* Размер иконки */
+    height: 50px;
+    margin-right: 10px;
+	margin-top: -10px;
+}
+.hiddify-icon {
+    width: 45px; /* Размер иконки */
+    height: 45px;
+    margin-right: 10px;
+	margin-top: -10px;
+}
+
+.amnezia-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+	
+}
+.karing-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+	margin-right: 10px;
+}
+
 img {
     max-width: 400px;
 }
+
+
 button {
     width: 100%;
     margin-bottom: 20px;
@@ -26,8 +90,12 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+	transition: background 0.3s ease, transform 0.2s ease;
 }
-
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+} 
 .button--loading::after {
     content: "";
     width: 15px;
@@ -47,46 +115,20 @@ button.button--loading {
     display: none;
 }
 
-#generateButton {
+#generateButton,#generateButton2,#generateButton5,#generateButton6 {
     background: linear-gradient(90deg, #eeac43, #f15874);
+}
+#generateButton3,#generateButton4,#generateButton7,#generateButton8 {
+    background: linear-gradient(90deg, #eeac43, #f15874);margin-bottom: 4px;
 }
 
-#generateButton2 {
-    background: linear-gradient(90deg, #eeac43, #f15874);
-}
-#generateButton3 {
-    background: linear-gradient(90deg, #eeac43, #f15874);
-}
-#generateButton4 {
-    background: linear-gradient(90deg, #eeac43, #f15874);
-}
-#generateButton5 {
-    background: linear-gradient(90deg, #eeac43, #f15874);
-}
-#generateButton6 {
-    background: linear-gradient(90deg, #eeac43, #f15874);
-}
-#generateButton7 {
-    background: linear-gradient(90deg, #eeac43, #f15874);
-}
-
-#telegramButton {
+#telegramButton,#BoostyButton,#githubButton,#DonationAlertsButton,#BoostyNewButton {
     background: linear-gradient(90deg, #2a3797, #0d87d2);
+	width: 100%;
+    max-width: 400px;
+    margin: 10px auto;
 }
 
-#BoostyButton {
-    background: linear-gradient(90deg, #2a3797, #0d87d2)
-}
-#githubButton {
-    background: linear-gradient(90deg, #2a3797, #0d87d2)
-}
-
-#DonationAlertsButton {
-    background: linear-gradient(90deg, #2a3797, #0d87d2)
-}
-#BoostyNewButton {
-    background: linear-gradient(90deg, #2a3797, #0d87d2)
-}
 
 button:disabled {
     cursor: not-allowed;
@@ -97,6 +139,20 @@ button:disabled {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+#newButtons {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease, height 0.5s ease, visibility 0.5s ease;
+}
+
+#newButtons.show {
+    visibility: visible;
+    opacity: 1;
+    height: 120px; /* Фиксированная высота для плавной анимации */
+}	
+
 #status {
     margin-bottom: 20px;
     color: red;
@@ -106,9 +162,27 @@ button:disabled {
 	margin: 0 auto 20px;
 	display: none;
 }
-/* Показываем элемент только на экранах с шириной меньше 768px (мобильные устройства) */
-@media (max-width: 600px) {
-    #status {
+
+
+
+@media (max-width: 730px) {
+	       
+	.grid-container {
+		grid-template-columns: 1fr; /* Один столбец на мобильных устройствах */}
+	#status {
         display: block; /* или inline, inline-block, flex и т.д., в зависимости от нужного отображения */
+   }
+	.containerClash {
+	
+		order: 3; /* Перемещаем Clash вниз */
+    }
+
+    .containerAWG:nth-of-type(4) { /* Блок NekoBox */
+        order: 2;		/* Перемещаем NekoBox на место Clash */
+    }
+	.containerAWG:nth-of-type(2) { /* Блок NekoBox */
+        margin-bottom: 60px;		/* Перемещаем NekoBox на место Clash */
+    }
+		
     }
 }
