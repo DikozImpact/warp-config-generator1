@@ -250,12 +250,49 @@ async function generateConfig7() {
     }
 }
 
+async function generateConfig8() {
+    const button = document.getElementById('generateButton8');
+    const button_text = document.querySelector('#generateButton8 .button__text');
+    const status = document.getElementById('status');
+    const randomNumber = Math.floor(Math.random() * (99 - 10 + 1)) + 10;
+
+    // Изменяем состояние кнопки на загрузку
+    button.disabled = true;
+    button.classList.add("button--loading");
+
+    try {
+        const response = await fetch(`/warp8`);
+        const data = await response.json();
+
+        if (data.success) {
+            const downloadFile = () => {
+                const link = document.createElement('a');
+                link.href = 'data:text/plain;base64,' + data.content;
+                link.download = `HusiWARP_${randomNumber}.conf`;
+                link.click();
+            };
+
+            button_text.textContent = `Скачать HusiWARP_${randomNumber}.conf`;
+            button.onclick = downloadFile;
+            downloadFile();
+        } else {
+            status.textContent = 'Ошибка: ' + data.message;
+        }
+    } catch (error) {
+        status.textContent = 'Произошла ошибка при генерации.';
+    } finally {
+        button.disabled = false;
+        button.classList.remove("button--loading");
+    }
+}
+
 document.getElementById('generateButton2').onclick = generateConfig2;
 document.getElementById('generateButton3').onclick = generateConfig3;
 document.getElementById('generateButton4').onclick = generateConfig4;
 document.getElementById('generateButton5').onclick = generateConfig5;
 document.getElementById('generateButton6').onclick = generateConfig6;
 document.getElementById('generateButton7').onclick = generateConfig7;
+document.getElementById('generateButton8').onclick = generateConfig8;
 
 document.getElementById('generateButton').onclick = generateConfig;
 
@@ -272,12 +309,29 @@ document.getElementById('BoostyNewButton').onclick = function() {
 }
 
 document.getElementById('BoostyButton').onclick = function() {
-    // Скрываем текущую кнопку
-  this.style.display = 'none';
+    const newButtons = document.getElementById('newButtons');
 
-  // Показываем новые кнопки
-  document.getElementById('newButtons').style.display = 'block';
-}
+    if (newButtons.classList.contains('show')) {
+        // Если блок видим, скрываем его с анимацией
+        newButtons.classList.remove('show');
+        setTimeout(() => {
+            this.style.display = 'block'; // Показываем кнопку BoostyButton
+        }, 500); // Задержка должна соответствовать длительности анимации
+    } else {
+        // Если блок скрыт, показываем его с анимацией
+        this.style.display = 'none';
+        newButtons.classList.add('show');
+
+        // Добавляем задержку перед прокруткой
+        setTimeout(() => {
+            // Прокручиваем страницу до самого низа
+            window.scrollTo({
+                top: document.body.scrollHeight, // Прокручиваем до конца страницы
+                behavior: 'smooth' // Плавная прокрутка
+            });
+        }, 300); // Увеличиваем задержку до 500 мс
+    }
+};
 
 document.getElementById('githubButton').onclick = function() {
     window.location.href = 'https://docs.google.com/document/d/1DX4X7t7V4QasQJYbps5D1yNtsK7tqsouSMJH2w4AMOY';
