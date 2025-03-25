@@ -1,4 +1,3 @@
-
 const express = require('express');
 const { getWarpConfigLink } = require('./AWGp');
 const { getWarpConfigLink2 } = require('./Karing');
@@ -56,7 +55,6 @@ app.get('/warp3', async (req, res) => {
             res.json({ success: true, content });
         } else {
             res.status(500).json({ success: false, message: 'Не удалось сгенерировать конфиг.' });
-
         }
     } catch (error) {
         console.error('Ошибка при обработке запроса:', error);
