@@ -1,73 +1,135 @@
+const express = require('express');
+const { getWarpConfigLink } = require('./AWGp');
+const { getWarpConfigLink2 } = require('./Karing');
+const { getWarpConfigLink3 } = require('./WarpInWarp');
+const { getWarpConfigLink4 } = require('./AWGr');
+const { getWarpConfigLink5 } = require('./Neko');
+const { getWarpConfigLink6 } = require('./AWGm');
+const { getWarpConfigLink7 } = require('./Clash');
+const { getWarpConfigLink8 } = require('./Husi');
+const path = require('path');
 
-const fetch = require('node-fetch');
-const nacl = require('tweetnacl');
-const { Buffer } = require('buffer');
+const app = express();
 
-function generateKeys() {
-    const keyPair = nacl.box.keyPair();
-    return {
-        privKey: Buffer.from(keyPair.secretKey).toString('base64'),
-        pubKey: Buffer.from(keyPair.publicKey).toString('base64')
-    };
-}
+// Подключаем статические файлы
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Функция для отправки запросов к API Cloudflare
-async function apiRequest(method, endpoint, body = null, token = null) {
-    const headers = {
-        'User-Agent': '',
-@@ -34,33 +33,29 @@
-    return response.json();
-}
+// Главная страница
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
-async function generateWarpConfig() {
-    const { privKey, pubKey } = generateKeys();
-
-    // Регистрация устройства
-    const regBody = {
-        install_id: "",
-        tos: new Date().toISOString(),
-        key: pubKey,
-        fcm_token: "",
-        type: "ios",
-        locale: "en_US"
-    };
-    const regResponse = await apiRequest('POST', 'reg', regBody);
-
-    const id = regResponse.result.id;
-    const token = regResponse.result.token;
-
-    // Включение WARP
-    const warpResponse = await apiRequest('PATCH', `reg/${id}`, { warp_enabled: true }, token);
-
-    const peer_pub = warpResponse.result.config.peers[0].public_key;
-    const peer_endpoint = warpResponse.result.config.peers[0].endpoint.host;
-    const client_ipv4 = warpResponse.result.config.interface.addresses.v4;
-    const client_ipv6 = warpResponse.result.config.interface.addresses.v6;
-
-    // Формируем конфиг
-    const conf = `[Interface]
-PrivateKey = ${privKey}
-S1 = 0
-S2 = 0
-@@ -80,21 +75,9 @@
-AllowedIPs = 0.0.0.0/0, ::/0
-Endpoint = engage.cloudflareclient.com:500`;
-
-    // Возвращаем конфиг
-    return conf;
-}
-
-// Основная функция для генерации ссылки на скачивание конфига
-async function getWarpConfigLink() {
+// Маршрут для генерации конфига
+app.get('/warp', async (req, res) => {
     try {
-        const conf = await generateWarpConfig();
-        const confBase64 = Buffer.from(conf).toString('base64');
-        return `${confBase64}`;
+        const content = await getWarpConfigLink();
+        if (content) {
+            res.json({ success: true, content });
+        } else {
+            res.status(500).json({ success: false, message: 'Не удалось сгенерировать конфиг.' });
+        }
     } catch (error) {
-        console.error('Ошибка при генерации конфига:', error);
-        return null;
+        console.error('Ошибка при обработке запроса:', error);
+        res.status(500).json({ success: false, message: 'Произошла ошибка на сервере.' });
     }
-}
+});
 
-// Экспортируем функцию для использования
-module.exports = { getWarpConfigLink };
+app.get('/warp2', async (req, res) => {
+    try {
+        const content = await getWarpConfigLink2();
+        if (content) {
+            res.json({ success: true, content });
+        } else {
+            res.status(500).json({ success: false, message: 'Не удалось сгенерировать конфиг.' });
+        }
+    } catch (error) {
+        console.error('Ошибка при обработке запроса:', error);
+        res.status(500).json({ success: false, message: 'Произошла ошибка на сервере.' });
+    }
+});
+
+app.get('/warp3', async (req, res) => {
+    try {
+        const content = await getWarpConfigLink3();
+        if (content) {
+            res.json({ success: true, content });
+        } else {
+            res.status(500).json({ success: false, message: 'Не удалось сгенерировать конфиг.' });
+        }
+    } catch (error) {
+        console.error('Ошибка при обработке запроса:', error);
+        res.status(500).json({ success: false, message: 'Произошла ошибка на сервере.' });
+    }
+});
+
+app.get('/warp4', async (req, res) => {
+    try {
+        const content = await getWarpConfigLink4();
+        if (content) {
+            res.json({ success: true, content });
+        } else {
+            res.status(500).json({ success: false, message: 'Не удалось сгенерировать конфиг.' });
+        }
+    } catch (error) {
+        console.error('Ошибка при обработке запроса:', error);
+        res.status(500).json({ success: false, message: 'Произошла ошибка на сервере.' });
+    }
+});
+
+app.get('/warp5', async (req, res) => {
+    try {
+        const content = await getWarpConfigLink5();
+        if (content) {
+            res.json({ success: true, content });
+        } else {
+            res.status(500).json({ success: false, message: 'Не удалось сгенерировать конфиг.' });
+        }
+    } catch (error) {
+        console.error('Ошибка при обработке запроса:', error);
+        res.status(500).json({ success: false, message: 'Произошла ошибка на сервере.' });
+    }
+});
+
+app.get('/warp6', async (req, res) => {
+    try {
+        const content = await getWarpConfigLink6();
+        if (content) {
+            res.json({ success: true, content });
+        } else {
+            res.status(500).json({ success: false, message: 'Не удалось сгенерировать конфиг.' });
+        }
+    } catch (error) {
+        console.error('Ошибка при обработке запроса:', error);
+        res.status(500).json({ success: false, message: 'Произошла ошибка на сервере.' });
+    }
+});
+
+app.get('/warp7', async (req, res) => {
+    try {
+        const content = await getWarpConfigLink7();
+        if (content) {
+            res.json({ success: true, content });
+        } else {
+            res.status(500).json({ success: false, message: 'Не удалось сгенерировать конфиг.' });
+        }
+    } catch (error) {
+        console.error('Ошибка при обработке запроса:', error);
+        res.status(500).json({ success: false, message: 'Произошла ошибка на сервере.' });
+    }
+});
+
+app.get('/warp8', async (req, res) => {
+    try {
+        const content = await getWarpConfigLink8();
+        if (content) {
+            res.json({ success: true, content });
+        } else {
+            res.status(500).json({ success: false, message: 'Не удалось сгенерировать конфиг.' });
+        }
+    } catch (error) {
+        console.error('Ошибка при обработке запроса:', error);
+        res.status(500).json({ success: false, message: 'Произошла ошибка на сервере.' });
+    }
+});
+
+module.exports = app;
