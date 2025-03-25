@@ -1,6 +1,6 @@
-const fetch = require('node-fetch');
-const nacl = require('tweetnacl');
-const { Buffer } = require('buffer');
+// src/lib/AWGp.js
+
+import nacl from 'tweetnacl';
 
 function generateKeys() {
     const keyPair = nacl.box.keyPair();
@@ -10,7 +10,6 @@ function generateKeys() {
     };
 }
 
-// Функция для отправки запросов к API Cloudflare
 async function apiRequest(method, endpoint, body = null, token = null) {
     const headers = {
         'User-Agent': '',
@@ -34,33 +33,29 @@ async function apiRequest(method, endpoint, body = null, token = null) {
     return response.json();
 }
 
-async function generateWarpConfig() {
-    const { privKey, pubKey } = generateKeys();
+export async function getWarpConfigLink() {
+    try {
+        const { privKey, pubKey } = generateKeys();
 
-    // Регистрация устройства
-    const regBody = {
-        install_id: "",
-        tos: new Date().toISOString(),
-        key: pubKey,
-        fcm_token: "",
-        type: "ios",
-        locale: "en_US"
-    };
-    const regResponse = await apiRequest('POST', 'reg', regBody);
+        const regBody = {
+            install_id: "",
+            tos: new Date().toISOString(),
+            key: pubKey,
+            fcm_token: "",
+            type: "ios",
+            locale: "en_US"
+        };
+        
+        const regResponse = await apiRequest('POST', 'reg', regBody);
+        const id = regResponse.result.id;
+        const token = regResponse.result.token;
 
-    const id = regResponse.result.id;
-    const token = regResponse.result.token;
+        const warpResponse = await apiRequest('PATCH', `reg/${id}`, { warp_enabled: true }, token);
+        const peer_pub = warpResponse.result.config.peers[0].public_key;
+        const client_ipv4 = warpResponse.result.config.interface.addresses.v4;
+        const client_ipv6 = warpResponse.result.config.interface.addresses.v6;
 
-    // Включение WARP
-    const warpResponse = await apiRequest('PATCH', `reg/${id}`, { warp_enabled: true }, token);
-
-    const peer_pub = warpResponse.result.config.peers[0].public_key;
-    const peer_endpoint = warpResponse.result.config.peers[0].endpoint.host;
-    const client_ipv4 = warpResponse.result.config.interface.addresses.v4;
-    const client_ipv6 = warpResponse.result.config.interface.addresses.v6;
-
-    // Формируем конфиг
-    const conf = `[Interface]
+        const conf = `[Interface]
 PrivateKey = ${privKey}
 S1 = 0
 S2 = 0
@@ -80,21 +75,9 @@ PublicKey = ${peer_pub}
 AllowedIPs = 0.0.0.0/0, ::/0
 Endpoint = engage.cloudflareclient.com:500`;
 
-    // Возвращаем конфиг
-    return conf;
-}
-
-// Основная функция для генерации ссылки на скачивание конфига
-async function getWarpConfigLink() {
-    try {
-        const conf = await generateWarpConfig();
-        const confBase64 = Buffer.from(conf).toString('base64');
-        return `${confBase64}`;
+        return Buffer.from(conf).toString('base64');
     } catch (error) {
-        console.error('Ошибка при генерации конфига:', error);
+        console.error('Error generating config:', error);
         return null;
     }
 }
-
-// Экспортируем функцию для использования
-module.exports = { getWarpConfigLink };
