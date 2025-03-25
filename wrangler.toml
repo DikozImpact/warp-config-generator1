@@ -1,0 +1,10 @@
+name = "warp-generator"
+compatibility_date = "2023-08-15"
+main = "src/workers/index.js"
+
+[build]
+command = "npm install && npm run build"
+
+[[routers]]
+route = "/warp*"
+service = "warp-generator"
